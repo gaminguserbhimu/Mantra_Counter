@@ -45,6 +45,7 @@ fun MantraCounterScreen(modifier: Modifier = Modifier) {
 
     var mantra by remember { mutableStateOf("Om Namah Shivaya") }
     var goal by remember { mutableStateOf("54") }
+    var count by remember { mutableStateOf(value = "0") }
 
 
     Column(
@@ -87,9 +88,21 @@ fun MantraCounterScreen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(10.dp))
 
         Text(
-            text = "0 / $goal",
+            text = "$count / $goal",
             fontSize = 36.sp
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { }) {
+            Text("Count")
+        }
+
+        Spacer(modifier = Modifier.height(16.dp))
+
+        Button(onClick = { }) {
+            Text("Reset")
+        }
     }
 }
 
