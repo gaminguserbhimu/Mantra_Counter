@@ -9,6 +9,6 @@ fun AddMantraScreen(
     navController: NavController
 ) {
 
-    Text("Add Mantra Screen")
+    Text("Add Mantra")
 
 }
