@@ -19,6 +19,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.foundation.layout.*
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import com.yourname.mantracounter.ui.theme.MantraCounterTheme
 
 class MainActivity : ComponentActivity() {
@@ -39,48 +42,54 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MantraCounterScreen(modifier: Modifier = Modifier) {
+
+    var mantra by remember { mutableStateOf("Om Namah Shivaya") }
+    var goal by remember { mutableStateOf("54") }
+
+
     Column(
-        modifier = modifier.fillMaxSize().padding(24.dp),
+        modifier = modifier.fillMaxSize().padding(20.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        Spacer(modifier = Modifier.height(30.dp))
 
         Text(
             text = "🙏 Mantra Counter",
             fontSize = 30.sp
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
-        Text(
-            text = "Om Namah Shivya",
-            fontSize = 24.sp
+        OutlinedTextField(
+            value = mantra,
+            onValueChange = { mantra = it },
+            label = { Text("Mantra") },
+            modifier = Modifier.fillMaxWidth()
         )
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Text(
-            text = "0 / 54",
-            fontSize = 36.sp
+        OutlinedTextField(
+            value = goal,
+            onValueChange = { goal = it },
+            label = { Text("Goal") },
+            modifier = Modifier.fillMaxWidth()
         )
 
-        Spacer(modifier = Modifier.height(40.dp))
+        Spacer(modifier = Modifier.height(30.dp))
 
-        Button(onClick = { }) {
-            Text("Start Listening")
-        }
+        Text(
+            text = mantra,
+            fontSize = 24.sp
+        )
 
-        Spacer(modifier = Modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(10.dp))
 
-        Button(onClick = { }) {
-            Text("Stop")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { }) {
-            Text("Reset")
-        }
+        Text(
+            text = "0 / $goal",
+            fontSize = 36.sp
+        )
     }
 }
 
