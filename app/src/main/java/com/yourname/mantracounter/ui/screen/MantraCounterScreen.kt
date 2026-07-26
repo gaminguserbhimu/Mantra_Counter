@@ -2,6 +2,7 @@ package com.yourname.mantracounter.ui.screen
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -30,8 +31,7 @@ fun MantraCounterScreen(modifier: Modifier = Modifier) {
 
     val goalValue = goal.toFloatOrNull() ?: 1f
     val progress = count.toFloat() / goalValue
-
-
+    val percentage = ((count.toFloat() / goalValue) * 100).toInt()
 
     Column(
         modifier = modifier.fillMaxSize().padding(20.dp),
@@ -77,26 +77,38 @@ fun MantraCounterScreen(modifier: Modifier = Modifier) {
             fontSize = 36.sp
         )
 
+        Text(
+            text ="$percentage% Complete",
+            fontSize = 24.sp
+        )
+
+
+        Spacer(modifier = Modifier.height(16.dp))
+
         LinearProgressIndicator(
             progress = { progress },
             modifier = Modifier.fillMaxWidth())
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        Button(onClick = {
-            if (count < goal.toInt()) {
-                count++
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceEvenly
+        ) {
+
+            Button(onClick = {
+                if (count < goal.toInt()) {
+                    count++
+                }
+            }) {
+                Text("Count")
             }
-        }) {
-            Text("Count")
-        }
 
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = {
-            count = 0
-        }) {
-            Text("Reset")
+            Button(onClick = {
+                count = 0
+            }) {
+                Text("Reset")
+            }
         }
     }
 }

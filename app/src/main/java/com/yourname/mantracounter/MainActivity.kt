@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import com.yourname.mantracounter.model.HomeScreen
 import com.yourname.mantracounter.ui.screen.MantraCounterScreen
 import com.yourname.mantracounter.ui.theme.MantraCounterTheme
 
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            MantraCounterScreen()
+            HomeScreen()
         }
     }
 }
@@ -41,6 +42,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun GreetingPreview() {
     MantraCounterTheme {
-        MantraCounterScreen()
+        HomeScreen()
     }
 }
