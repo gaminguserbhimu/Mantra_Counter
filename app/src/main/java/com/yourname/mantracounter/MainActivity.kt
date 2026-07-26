@@ -22,89 +22,20 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import com.yourname.mantracounter.ui.screen.MantraCounterScreen
 import com.yourname.mantracounter.ui.theme.MantraCounterTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+
         setContent {
-            MantraCounterTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    MantraCounterScreen(
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            MantraCounterScreen()
         }
     }
 }
 
-@Composable
-fun MantraCounterScreen(modifier: Modifier = Modifier) {
 
-    var mantra by remember { mutableStateOf("Om Namah Shivaya") }
-    var goal by remember { mutableStateOf("54") }
-    var count by remember { mutableStateOf(value = "0") }
-
-
-    Column(
-        modifier = modifier.fillMaxSize().padding(20.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Text(
-            text = "🙏 Mantra Counter",
-            fontSize = 30.sp
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        OutlinedTextField(
-            value = mantra,
-            onValueChange = { mantra = it },
-            label = { Text("Mantra") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(20.dp))
-
-        OutlinedTextField(
-            value = goal,
-            onValueChange = { goal = it },
-            label = { Text("Goal") },
-            modifier = Modifier.fillMaxWidth()
-        )
-
-        Spacer(modifier = Modifier.height(30.dp))
-
-        Text(
-            text = mantra,
-            fontSize = 24.sp
-        )
-
-        Spacer(modifier = Modifier.height(10.dp))
-
-        Text(
-            text = "$count / $goal",
-            fontSize = 36.sp
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { }) {
-            Text("Count")
-        }
-
-        Spacer(modifier = Modifier.height(16.dp))
-
-        Button(onClick = { }) {
-            Text("Reset")
-        }
-    }
-}
 
 @Preview(showBackground = true)
 @Composable
