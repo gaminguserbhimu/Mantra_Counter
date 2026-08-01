@@ -10,20 +10,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.yourname.mantracounter.viewmodel.MantraViewModel
 
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(navController: NavController,
+               viewModel: MantraViewModel
+) {
 
-    val mantras = listOf(
-        Mantra(1,"Om Namah Shivaya",54),
-
-        Mantra(2,"Gayatri Mantra",108),
-
-        Mantra(3,"Maha Mrityunjaya",21),
-
-        Mantra(4,"Hanuman Chalisa",1)
-
-    )
+    val mantras = viewModel.mantras
 
     Column(
         modifier = Modifier
