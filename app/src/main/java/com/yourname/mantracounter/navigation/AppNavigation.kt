@@ -27,7 +27,7 @@ fun AppNavigation() {
         composable("add") {
             AddMantraScreen(
                 navController = navController,
-                viewModel = viewModel
+                viewModel = viewModel,
             )
         }
 
