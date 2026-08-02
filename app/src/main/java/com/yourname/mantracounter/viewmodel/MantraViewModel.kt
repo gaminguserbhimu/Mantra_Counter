@@ -20,4 +20,12 @@ class MantraViewModel : ViewModel() {
             )
         )
     }
+
+    fun getMantraById(id: Int): Mantra? {
+
+        return mantras.find {
+            it.id == id
+        }
+
+    }
 }

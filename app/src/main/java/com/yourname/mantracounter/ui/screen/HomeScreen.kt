@@ -1,11 +1,10 @@
-package com.yourname.mantracounter.model
+package com.yourname.mantracounter.ui.screen
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -65,7 +64,9 @@ fun HomeScreen(navController: NavController,
                         Spacer(modifier = Modifier.height(12.dp))
 
                         Button(
-                            onClick = { }
+                            onClick = {
+                                navController.navigate("chant/${mantra.id}")
+                            }
                         ) {
                             Text("Start")
                         }
