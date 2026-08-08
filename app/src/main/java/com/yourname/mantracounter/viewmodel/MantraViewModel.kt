@@ -32,6 +32,22 @@ class MantraViewModel(application: Application) : AndroidViewModel(application) 
 
                 _mantras.value = mantraList
 
+                if (mantraList.isEmpty()) {
+
+                    repository.addMantra(
+                        Mantra(
+                            name = "Om Namah Shivaya",
+                            goal = 54
+                        )
+                    )
+
+                    repository.addMantra(
+                        Mantra(
+                            name = "Gayatri Mantra",
+                            goal = 108
+                        )
+                    )
+                }
             }
         }
     }

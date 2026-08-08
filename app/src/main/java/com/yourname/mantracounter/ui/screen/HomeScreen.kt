@@ -11,6 +11,10 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.yourname.mantracounter.viewmodel.MantraViewModel
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.remember
 
 @Composable
 fun HomeScreen(navController: NavController,
@@ -18,6 +22,7 @@ fun HomeScreen(navController: NavController,
 ) {
 
     val mantras = viewModel.mantras.collectAsState()
+    var showDeleteDialog by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
@@ -70,6 +75,58 @@ fun HomeScreen(navController: NavController,
                             }
                         ) {
                             Text("Start")
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Button(
+                            onClick = {
+                                showDeleteDialog = true
+                            }
+                        ) {
+                            Text("Delete")
+                        }
+
+                        if (showDeleteDialog) {
+
+                            AlertDialog(
+                                onDismissRequest = {
+                                    showDeleteDialog = false
+                                },
+
+                                title = {
+                                    Text("Delete Mantra?")
+                                },
+
+                                text = {
+                                    Text(
+                                        "Are you sure you want to delete \"${mantra.name}\"?"
+                                    )
+                                },
+
+                                confirmButton = {
+
+                                    TextButton(
+                                        onClick = {
+                                            viewModel.deleteMantra(mantra)
+                                            showDeleteDialog = false
+                                        }
+                                    ) {
+                                        Text("Delete")
+                                    }
+                                },
+
+                                dismissButton = {
+
+                                    TextButton(
+                                        onClick = {
+                                            showDeleteDialog = false
+                                        }
+                                    ) {
+                                        Text("Cancel")
+                                    }
+                                }
+                            )
                         }
                     }
                 }
