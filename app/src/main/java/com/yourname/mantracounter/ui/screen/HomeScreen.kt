@@ -81,6 +81,16 @@ fun HomeScreen(navController: NavController,
 
                         Button(
                             onClick = {
+                                navController.navigate("edit/${mantra.id}")
+                            }
+                        ) {
+                            Text("Edit")
+                        }
+
+                        Spacer(modifier = Modifier.height(8.dp))
+
+                        Button(
+                            onClick = {
                                 showDeleteDialog = true
                             }
                         ) {

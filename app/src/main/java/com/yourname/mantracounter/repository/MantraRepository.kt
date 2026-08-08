@@ -15,7 +15,13 @@ class MantraRepository(
         mantraDao.insertMantra(mantra)
     }
 
+    suspend fun updateMantra(mantra: Mantra) {
+        mantraDao.updateMantra(mantra)
+    }
+
     suspend fun deleteMantra(mantra: Mantra) {
         mantraDao.deleteMantra(mantra)
     }
+
+
 }

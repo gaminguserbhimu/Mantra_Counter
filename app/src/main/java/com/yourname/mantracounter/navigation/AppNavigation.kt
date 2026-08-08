@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.*
 import com.yourname.mantracounter.ui.screen.AddMantraScreen
 import com.yourname.mantracounter.ui.screen.ChantScreen
+import com.yourname.mantracounter.ui.screen.EditMantraScreen
 import com.yourname.mantracounter.ui.screen.HomeScreen
 import com.yourname.mantracounter.viewmodel.MantraViewModel
 
@@ -40,6 +41,20 @@ fun AppNavigation() {
             AddMantraScreen(
                 navController = navController,
                 viewModel = viewModel,
+            )
+        }
+
+        composable("edit/{mantraId}") { backStackEntry ->
+
+            val mantraId =
+                backStackEntry.arguments
+                    ?.getString("mantraId")
+                    ?.toInt() ?: 0
+
+            EditMantraScreen(
+                navController = navController,
+                viewModel = viewModel,
+                mantraId = mantraId
             )
         }
 

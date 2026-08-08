@@ -18,6 +18,14 @@ class MantraViewModel(application: Application) : AndroidViewModel(application) 
     private val _mantras = MutableStateFlow<List<Mantra>>(emptyList())
     val mantras: StateFlow<List<Mantra>> = _mantras.asStateFlow()
 
+    fun updateMantra(mantra: Mantra) {
+
+        viewModelScope.launch {
+
+            repository.updateMantra(mantra)
+        }
+    }
+
     init {
 
         val database = MantraDatabase.getDatabase(application)
