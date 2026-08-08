@@ -10,13 +10,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.yourname.mantracounter.viewmodel.MantraViewModel
+import androidx.compose.runtime.collectAsState
 
 @Composable
 fun HomeScreen(navController: NavController,
                viewModel: MantraViewModel
 ) {
 
-    val mantras = viewModel.mantras
+    val mantras = viewModel.mantras.collectAsState()
 
     Column(
         modifier = Modifier
@@ -40,7 +41,7 @@ fun HomeScreen(navController: NavController,
 
         LazyColumn {
 
-            items(mantras) { mantra ->
+            items(mantras.value) { mantra ->
 
                 Card(
                     modifier = Modifier

@@ -1,31 +1,66 @@
 package com.yourname.mantracounter.viewmodel
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.viewModelScope
+import com.yourname.mantracounter.database.MantraDatabase
 import com.yourname.mantracounter.model.Mantra
+import com.yourname.mantracounter.repository.MantraRepository
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
-class MantraViewModel : ViewModel() {
+class MantraViewModel(application: Application) : AndroidViewModel(application) {
 
-    val mantras = mutableStateListOf(
-        Mantra(1, "Om Namah Shivaya", 54),
-        Mantra(2, "Gayatri Mantra", 108)
-    )
+    private val repository: MantraRepository
+
+    private val _mantras = MutableStateFlow<List<Mantra>>(emptyList())
+    val mantras: StateFlow<List<Mantra>> = _mantras.asStateFlow()
+
+    init {
+
+        val database = MantraDatabase.getDatabase(application)
+
+        repository = MantraRepository(
+            database.mantraDao()
+        )
+
+        viewModelScope.launch {
+
+            repository.allMantras.collect { mantraList ->
+
+                _mantras.value = mantraList
+
+            }
+        }
+    }
 
     fun addMantra(name: String, goal: Int) {
-        mantras.add(
-            Mantra(
-                id = mantras.size + 1,
-                name = name,
-                goal = goal
+
+        viewModelScope.launch {
+
+            repository.addMantra(
+                Mantra(
+                    name = name,
+                    goal = goal
+                )
             )
-        )
+        }
+    }
+
+    fun deleteMantra(mantra: Mantra) {
+
+        viewModelScope.launch {
+
+            repository.deleteMantra(mantra)
+        }
     }
 
     fun getMantraById(id: Int): Mantra? {
 
-        return mantras.find {
+        return _mantras.value.find {
             it.id == id
         }
-
     }
 }
